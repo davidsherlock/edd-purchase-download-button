@@ -1,7 +1,7 @@
-=== Easy Digital Downloads - Purchased Download Button ===
+=== Easy Digital Downloads - Purchase Download Button ===
 Contributors: sellcomet, mandyjonesmusic
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LLR26ABB7C39Q
-Tags: easy digital downloads, digital, download, downloads, edd, sellcomet, purchased, button, link, e-commerce
+Tags: easy digital downloads, digital, download, downloads, edd, sellcomet, purchased, purchase, button, link, e-commerce
 Requires at least: 4.0
 Tested up to: 4.9.1
 Stable tag: trunk
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Automatically add a "Download" button instead of "Add To Cart" on purchased downloads.
 
 == Description ==
-**Purchased Download Button** for Easy Digital Downloads automatically adds a "Download" button instead of "Add To Cart" on purchased downloads. Variable pricing and multi-option pricing modes are supported and the correct files will be displayed depending on the product price option purchased. Once the file limit has been reached, the “Download” button will revert back to “Add To Cart” where the user can re-purchase the product to obtain more download attempts.
+**Purchase Download Button** for Easy Digital Downloads automatically adds a "Download" button instead of "Add To Cart" on purchased downloads. Variable pricing and multi-option pricing modes are supported and the correct files will be displayed depending on the product price option purchased. Once the file limit has been reached, the “Download” button will revert back to “Add To Cart” where the user can re-purchase the product to obtain more download attempts.
 
 ##Features##
 
@@ -43,6 +43,9 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 1.0.2, January 10, 2018 =
+* Tweak: Change plugin title and text domain to "Purchase Download Button".
 
 = 1.0.1, January 10, 2018 =
 * Tweak: Update plugin header with Sell Comet information
