@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name:     Easy Digital Downloads - Purchased Download Button
- * Plugin URI:      https://sellcomet.com/downloads/purchased-download-button
+ * Plugin Name:     Easy Digital Downloads - Purchase Download Button
+ * Plugin URI:      https://sellcomet.com/downloads/purchase-download-button
  * Description:     Automatically add a "Download" button instead of "Add To Cart" on purchased downloads.
- * Version:         1.0.1
+ * Version:         1.0.2
  * Author:          Sell Comet
  * Author URI:      https://sellcomet.com
- * Text Domain:     edd-purchased-download-button
+ * Text Domain:     edd-purchase-download-button
  * Domain Path:     languages
  *
- * @package         EDD\Purchased_Download_Button
+ * @package         EDD\Purchase_Download_Button
  * @author          Sell Comet
  * @copyright       Copyright (c) Sell Comet
  */
@@ -18,17 +18,17 @@
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
-if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
+if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
 
     /**
-     * Main EDD_Purchased_Download_Button class
+     * Main EDD_Purchase_Download_Button class
      *
      * @since       1.0.0
      */
-    class EDD_Purchased_Download_Button {
+    class EDD_Purchase_Download_Button {
 
         /**
-         * @var         EDD_Purchased_Download_Button $instance The one true EDD_Purchased_Download_Button
+         * @var         EDD_Purchase_Download_Button $instance The one true EDD_Purchase_Download_Button
          * @since       1.0.0
          */
         private static $instance;
@@ -39,11 +39,11 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
          *
          * @access      public
          * @since       1.0.0
-         * @return      object self::$instance The one true EDD_Purchased_Download_Button
+         * @return      object self::$instance The one true EDD_Purchase_Download_Button
          */
         public static function instance() {
             if( !self::$instance ) {
-                self::$instance = new EDD_Purchased_Download_Button();
+                self::$instance = new EDD_Purchase_Download_Button();
                 self::$instance->setup_constants();
                 self::$instance->load_textdomain();
                 self::$instance->hooks();
@@ -62,13 +62,13 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
          */
         private function setup_constants() {
             // Plugin version
-            define( 'EDD_PURCHASED_DOWNLOAD_BUTTON_VER', '1.0.1' );
+            define( 'EDD_PURCHASE_DOWNLOAD_BUTTON_VER', '1.0.1' );
 
             // Plugin path
-            define( 'EDD_PURCHASED_DOWNLOAD_BUTTON_DIR', plugin_dir_path( __FILE__ ) );
+            define( 'EDD_PURCHASE_DOWNLOAD_BUTTON_DIR', plugin_dir_path( __FILE__ ) );
 
             // Plugin URL
-            define( 'EDD_PURCHASED_DOWNLOAD_BUTTON_URL', plugin_dir_url( __FILE__ ) );
+            define( 'EDD_PURCHASE_DOWNLOAD_BUTTON_URL', plugin_dir_url( __FILE__ ) );
         }
 
 
@@ -86,7 +86,7 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
             }
 
             // Register a "Download" button instead of "Add To Cart" on purchased downloads.
-            add_filter( 'edd_purchase_download_form', array( $this, 'purchased_download_button' ), 10, 2 );
+            add_filter( 'edd_purchase_download_form', array( $this, 'purchase_download_button' ), 10, 2 );
         }
 
 
@@ -99,26 +99,26 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
          */
         public function load_textdomain() {
             // Set filter for language directory
-            $lang_dir = EDD_PURCHASED_DOWNLOAD_BUTTON_DIR . '/languages/';
+            $lang_dir = EDD_PURCHASE_DOWNLOAD_BUTTON_DIR . '/languages/';
             $lang_dir = apply_filters( 'edd_purchased_download_button_languages_directory', $lang_dir );
 
             // Traditional WordPress plugin locale filter
-            $locale = apply_filters( 'plugin_locale', get_locale(), 'edd-purchased-download-button' );
-            $mofile = sprintf( '%1$s-%2$s.mo', 'edd-purchased-download-button', $locale );
+            $locale = apply_filters( 'plugin_locale', get_locale(), 'edd-purchase-download-button' );
+            $mofile = sprintf( '%1$s-%2$s.mo', 'edd-purchase-download-button', $locale );
 
             // Setup paths to current locale file
             $mofile_local   = $lang_dir . $mofile;
-            $mofile_global  = WP_LANG_DIR . '/edd-purchased-download-button/' . $mofile;
+            $mofile_global  = WP_LANG_DIR . '/edd-purchase-download-button/' . $mofile;
 
             if( file_exists( $mofile_global ) ) {
-                // Look in global /wp-content/languages/edd-purchased-download-button/ folder
-                load_textdomain( 'edd-purchased-download-button', $mofile_global );
+                // Look in global /wp-content/languages/edd-purchase-download-button/ folder
+                load_textdomain( 'edd-purchase-download-button', $mofile_global );
             } elseif( file_exists( $mofile_local ) ) {
-                // Look in local /wp-content/plugins/edd-purchased-download-button/languages/ folder
-                load_textdomain( 'edd-purchased-download-button', $mofile_local );
+                // Look in local /wp-content/plugins/edd-purchase-download-button/languages/ folder
+                load_textdomain( 'edd-purchase-download-button', $mofile_local );
             } else {
                 // Load the default language files
-                load_plugin_textdomain( 'edd-purchased-download-button', false, $lang_dir );
+                load_plugin_textdomain( 'edd-purchase-download-button', false, $lang_dir );
             }
         }
 
@@ -132,11 +132,11 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
          * @return      array The modified EDD settings array
          */
         public function settings( $settings ) {
-          $settings['button_text']['free_download_text']['id'] = 'edd_purchased_download_button_text';
-          $settings['button_text']['free_download_text']['name'] = sprintf( __( '%s Text', 'edd-purchased-download-button' ), edd_get_label_singular() );
-          $settings['button_text']['free_download_text']['desc'] = sprintf( __( 'Text shown on the purchased %s.', 'edd-purchased-download-button' ), edd_get_label_plural( true ) );
+          $settings['button_text']['free_download_text']['id'] = 'edd_purchase_download_button_text';
+          $settings['button_text']['free_download_text']['name'] = sprintf( __( '%s Text', 'edd-purchase-download-button' ), edd_get_label_singular() );
+          $settings['button_text']['free_download_text']['desc'] = sprintf( __( 'Text shown on the purchased %s.', 'edd-purchase-download-button' ), edd_get_label_plural( true ) );
           $settings['button_text']['free_download_text']['type'] = 'text';
-          $settings['button_text']['free_download_text']['std'] = __( 'Download', 'edd-purchased-download-button' );
+          $settings['button_text']['free_download_text']['std'] = __( 'Download', 'edd-purchase-download-button' );
 
           return $settings;
         }
@@ -151,7 +151,7 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
          * @param       array $args Purchase form args (contains the download ID)
          * @return      string $purchase_form
          */
-        public function purchased_download_button( $purchase_form, $args ) {
+        public function purchase_download_button( $purchase_form, $args ) {
             global $edd_options;
 
             // Bail if user is not logged in
@@ -194,7 +194,7 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
                     $download_ids[] = $download_id;
                 }
 
-                $text  = isset( $edd_options['edd_purchased_download_button_text'] ) ? $edd_options['edd_purchased_download_button_text'] : 'Download';
+                $text  = isset( $edd_options['edd_purchase_download_button_text'] ) ? $edd_options['edd_purchase_download_button_text'] : 'Download';
                 $style = isset( $edd_options['button_style'] ) ? $edd_options['button_style'] : 'button';
                 $color = isset( $edd_options['checkout_color'] ) ? $edd_options['checkout_color'] : 'blue';
 
@@ -214,7 +214,7 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
 
                             // Generate the file URL and then make a link to it
                             $file_url = edd_get_download_file_url( $payment_key, $email, $filekey, $item, $price_id );
-                            $new_purchase_form .= '<a href="' . $file_url . '" class="edd-purchased-download-button ' . $style . ' ' . $color . ' edd-submit"><span class="edd-purchased-download-label">' . __( $text, 'edd-purchased-download-button' ) . '</span></a>';
+                            $new_purchase_form .= '<a href="' . $file_url . '" class="edd-purchase-download-button ' . $style . ' ' . $color . ' edd-submit"><span class="edd-purchased-download-label">' . __( $text, 'edd-purchase-download-button' ) . '</span></a>';
                         }
                     }
                     // As long as we ended up with links to show, use them.
@@ -302,7 +302,7 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
 
         	}
 
-        	$purchases = edd_get_payments( apply_filters( 'edd_purchased_download_button_get_users_purchases_args', $args ) );
+        	$purchases = edd_get_payments( apply_filters( 'edd_purchase_download_button_get_purchases_args', $args ) );
 
         	// No purchases
         	if ( ! $purchases )
@@ -315,13 +315,13 @@ if( !class_exists( 'EDD_Purchased_Download_Button' ) ) {
 
 
 /**
- * The main function responsible for returning the one true EDD_Purchased_Download_Button
+ * The main function responsible for returning the one true EDD_Purchase_Download_Button
  * instance to functions everywhere
  *
  * @since       1.0.0
- * @return      \EDD_Purchased_Download_Button The one true EDD_Purchased_Download_Button
+ * @return      \EDD_Purchase_Download_Button The one true EDD_Purchase_Download_Button
  */
-function edd_purchased_download_button() {
+function edd_purchase_download_button() {
   if ( ! class_exists( 'Easy_Digital_Downloads' ) ) {
     if ( ! class_exists( 'EDD_Extension_Activation' ) ) {
         require_once 'includes/class-activation.php';
@@ -335,7 +335,7 @@ function edd_purchased_download_button() {
 
   } else {
 
-    return EDD_Purchased_Download_Button::instance();
+    return EDD_Purchase_Download_Button::instance();
   }
 }
-add_action( 'plugins_loaded', 'edd_purchased_download_button' );
+add_action( 'plugins_loaded', 'edd_purchase_download_button' );
