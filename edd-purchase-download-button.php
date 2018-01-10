@@ -62,7 +62,7 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
          */
         private function setup_constants() {
             // Plugin version
-            define( 'EDD_PURCHASE_DOWNLOAD_BUTTON_VER', '1.0.1' );
+            define( 'EDD_PURCHASE_DOWNLOAD_BUTTON_VER', '1.0.2' );
 
             // Plugin path
             define( 'EDD_PURCHASE_DOWNLOAD_BUTTON_DIR', plugin_dir_path( __FILE__ ) );
