@@ -1,4 +1,4 @@
-## [Easy Digital Downloads - Purchased Download Button](https://sellcomet.com/downloads/commission-thresholds)
+## [Easy Digital Downloads - Purchased Download Button](https://sellcomet.com/downloads/purchased-download-button)
 
 Purchased Download Button for Easy Digital Downloads automatically adds a "Download" button instead of "Add To Cart" on purchased downloads. Variable pricing and multi-option pricing modes are supported and the correct files will be displayed depending on the product price option purchased. Once the file limit has been reached, the “Download” button will revert back to “Add To Cart” where the user can re-purchase the product to obtain more download attempts.
 
