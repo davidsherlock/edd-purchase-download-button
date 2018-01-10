@@ -224,7 +224,7 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
                 }
             }
 
-            return apply_filters( 'edd_purchases_download_button', $purchase_form, $args );
+            return apply_filters( 'edd_purchase_download_button', $purchase_form, $args );
         }
 
 
@@ -302,7 +302,7 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
 
         	}
 
-        	$purchases = edd_get_payments( apply_filters( 'edd_purchase_download_button_get_purchases_args', $args ) );
+        	$purchases = edd_get_payments( apply_filters( 'edd_purchase_download_button_get_purchase_args', $args ) );
 
         	// No purchases
         	if ( ! $purchases )
