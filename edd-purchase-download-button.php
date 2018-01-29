@@ -172,7 +172,9 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
             // This is necessary for the generation of the download link
             if ( edd_has_user_purchased( $current_user_id, $download_id, $variable_price_id = null ) ) {
                 $user_purchases = $this->get_users_purchases( $current_user_id, -1, false, 'complete' );
-
+                
+                $price_id = '';
+                
                 foreach ( $user_purchases as $purchase ) {
                     $cart_items = edd_get_payment_meta_cart_details( $purchase->ID );
                     $item_ids = wp_list_pluck( $cart_items, 'id' );
