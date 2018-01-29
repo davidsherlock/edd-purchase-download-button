@@ -142,7 +142,7 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
           $settings['button_text']['free_download_bundle_title']['desc'] = esc_html__( 'Use Item names for Bundles.', 'edd-purchase-download-button' ) ;
           $settings['button_text']['free_download_bundle_title']['type'] = 'checkbox';
           $settings['button_text']['free_download_bundle_title']['std'] = false;
-          
+
           return $settings;
         }
 
@@ -222,15 +222,15 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
 
                             // Generate the file URL and then make a link to it
                             $file_url = edd_get_download_file_url( $payment_key, $email, $filekey, $item, $price_id );
-                            
+
                             if ($use_bundle_title && $is_bundle) {
                                 $text = get_the_title($item);
                             } else {
                                 $text = __( $text, 'edd-purchase-download-button' );
                             }
-                            
+
                             $text = apply_filters( 'edd_purchase_download_button_label', $text, $item, $is_bundle );
-                            
+
                             $new_purchase_form .= '<a href="' . $file_url . '" class="edd-purchase-download-button ' . $style . ' ' . $color . ' edd-submit"><span class="edd-purchased-download-label">' . $text . '</span></a>';
                         }
                     }
