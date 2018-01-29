@@ -138,6 +138,11 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
           $settings['button_text']['free_download_text']['type'] = 'text';
           $settings['button_text']['free_download_text']['std'] = __( 'Download', 'edd-purchase-download-button' );
 
+          $settings['button_text']['free_download_bundle_title']['id'] = 'edd_purchase_download_bundle_title';
+          $settings['button_text']['free_download_bundle_title']['desc'] = esc_html__( 'Use Item names for Bundles.', 'edd-purchase-download-button' ) ;
+          $settings['button_text']['free_download_bundle_title']['type'] = 'checkbox';
+          $settings['button_text']['free_download_bundle_title']['std'] = false;
+          
           return $settings;
         }
 
@@ -190,13 +195,16 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
 
                 if ( edd_is_bundled_product( $download_id ) ) {
                     $download_ids = edd_get_bundled_products( $download_id );
+                    $is_bundle = true;
                 } else {
                     $download_ids[] = $download_id;
+                    $is_bundle = false;
                 }
 
-                $text  = isset( $edd_options['edd_purchase_download_button_text'] ) ? $edd_options['edd_purchase_download_button_text'] : 'Download';
-                $style = isset( $edd_options['button_style'] ) ? $edd_options['button_style'] : 'button';
-                $color = isset( $edd_options['checkout_color'] ) ? $edd_options['checkout_color'] : 'blue';
+                $text               = isset( $edd_options['edd_purchase_download_button_text'] ) ? $edd_options['edd_purchase_download_button_text'] : 'Download';
+                $use_bundle_title   = isset( $edd_options['edd_purchase_download_bundle_title'] ) ? $edd_options['edd_purchase_download_bundle_title'] : false;
+                $style              = isset( $edd_options['button_style'] ) ? $edd_options['button_style'] : 'button';
+                $color              = isset( $edd_options['checkout_color'] ) ? $edd_options['checkout_color'] : 'blue';
 
                 $new_purchase_form = '';
 
@@ -214,7 +222,16 @@ if( !class_exists( 'EDD_Purchase_Download_Button' ) ) {
 
                             // Generate the file URL and then make a link to it
                             $file_url = edd_get_download_file_url( $payment_key, $email, $filekey, $item, $price_id );
-                            $new_purchase_form .= '<a href="' . $file_url . '" class="edd-purchase-download-button ' . $style . ' ' . $color . ' edd-submit"><span class="edd-purchased-download-label">' . __( $text, 'edd-purchase-download-button' ) . '</span></a>';
+                            
+                            if ($use_bundle_title && $is_bundle) {
+                                $text = get_the_title($item);
+                            } else {
+                                $text = __( $text, 'edd-purchase-download-button' );
+                            }
+                            
+                            $text = apply_filters( 'edd_purchase_download_button_label', $text, $item, $is_bundle );
+                            
+                            $new_purchase_form .= '<a href="' . $file_url . '" class="edd-purchase-download-button ' . $style . ' ' . $color . ' edd-submit"><span class="edd-purchased-download-label">' . $text . '</span></a>';
                         }
                     }
                     // As long as we ended up with links to show, use them.
