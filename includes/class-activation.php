@@ -44,7 +44,7 @@ class EDD_Extension_Activation {
         if( isset( $plugins[$this->plugin_path . '/' . $this->plugin_file]['Name'] ) ) {
             $this->plugin_name = str_replace( 'Easy Digital Downloads - ', '', $plugins[$this->plugin_path . '/' . $this->plugin_file]['Name'] );
         } else {
-            $this->plugin_name = __( 'This plugin', 'edd' );
+            $this->plugin_name = esc_html__( 'This plugin', 'edd' );
         }
 
         // Is EDD installed?
@@ -81,12 +81,12 @@ class EDD_Extension_Activation {
     public function missing_edd_notice() {
         if( $this->has_edd ) {
             $url  = esc_url( wp_nonce_url( admin_url( 'plugins.php?action=activate&plugin=' . $this->edd_base ), 'activate-plugin_' . $this->edd_base ) );
-            $link = '<a href="' . $url . '">' . __( 'activate it', 'edd-purchase-download-button' ) . '</a>';
+            $link = '<a href="' . esc_url($url) . '">' . esc_html__( 'activate it', 'edd-purchase-download-button' ) . '</a>';
         } else {
             $url  = esc_url( wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=easy-digital-downloads' ), 'install-plugin_easy-digital-downloads' ) );
-            $link = '<a href="' . $url . '">' . __( 'install it', 'edd-purchase-download-button' ) . '</a>';
+            $link = '<a href="' . esc_url($url) . '">' . esc_html__( 'install it', 'edd-purchase-download-button' ) . '</a>';
         }
 
-        echo '<div class="error"><p>' . $this->plugin_name . sprintf( __( ' requires Easy Digital Downloads! Please %s to continue!', 'edd-purchase-download-button' ), $link ) . '</p></div>';
+        echo '<div class="error"><p>' . esc_html( $this->plugin_name ) . esc_html( sprintf( __( ' requires Easy Digital Downloads! Please %s to continue!', 'edd-purchase-download-button' ), $link ) ) . '</p></div>';
     }
 }

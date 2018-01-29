@@ -1,5 +1,5 @@
 === Easy Digital Downloads - Purchase Download Button ===
-Contributors: sellcomet, mandyjonesmusic
+Contributors: sellcomet, mandyjonesmusic, kprovance
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LLR26ABB7C39Q
 Tags: easy digital downloads, digital, download, downloads, edd, sellcomet, purchased, purchase, button, link, e-commerce
 Requires at least: 4.0
