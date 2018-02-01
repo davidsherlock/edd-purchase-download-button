@@ -44,6 +44,13 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 
 == Changelog ==
 
+= 1.0.3, February 1, 2018 =
+* Additional escaping for security, WP coding standard.
+* Undefined variable $price_id when variable pricing not used.
+* Code formatting improvements
+* Filter: 'edd_purchase_download_button_label'
+* Added "Use Item names for Bundles." option
+
 = 1.0.2, January 10, 2018 =
 * Tweak: Change plugin title and text domain to "Purchase Download Button".
 
